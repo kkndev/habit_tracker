@@ -1,0 +1,9 @@
+{
+  "helloFriend": "Hello Friend - {name}!",
+  "@helloFriend": {
+    "description": "The conventional newborn programmer greeting",
+    "placeholders": {
+      "name": {}
+    }
+  }
+}
