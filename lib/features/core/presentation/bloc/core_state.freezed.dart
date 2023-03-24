@@ -17,6 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$CoreState {
   String? get id => throw _privateConstructorUsedError;
+  UserSettingsEntity get settings => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $CoreStateCopyWith<CoreState> get copyWith =>
@@ -28,7 +29,9 @@ abstract class $CoreStateCopyWith<$Res> {
   factory $CoreStateCopyWith(CoreState value, $Res Function(CoreState) then) =
       _$CoreStateCopyWithImpl<$Res, CoreState>;
   @useResult
-  $Res call({String? id});
+  $Res call({String? id, UserSettingsEntity settings});
+
+  $UserSettingsEntityCopyWith<$Res> get settings;
 }
 
 /// @nodoc
@@ -45,13 +48,26 @@ class _$CoreStateCopyWithImpl<$Res, $Val extends CoreState>
   @override
   $Res call({
     Object? id = freezed,
+    Object? settings = null,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String?,
+      settings: null == settings
+          ? _value.settings
+          : settings // ignore: cast_nullable_to_non_nullable
+              as UserSettingsEntity,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $UserSettingsEntityCopyWith<$Res> get settings {
+    return $UserSettingsEntityCopyWith<$Res>(_value.settings, (value) {
+      return _then(_value.copyWith(settings: value) as $Val);
+    });
   }
 }
 
@@ -62,7 +78,10 @@ abstract class _$$_CoreStateCopyWith<$Res> implements $CoreStateCopyWith<$Res> {
       __$$_CoreStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? id});
+  $Res call({String? id, UserSettingsEntity settings});
+
+  @override
+  $UserSettingsEntityCopyWith<$Res> get settings;
 }
 
 /// @nodoc
@@ -77,12 +96,17 @@ class __$$_CoreStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = freezed,
+    Object? settings = null,
   }) {
     return _then(_$_CoreState(
       freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String?,
+      null == settings
+          ? _value.settings
+          : settings // ignore: cast_nullable_to_non_nullable
+              as UserSettingsEntity,
     ));
   }
 }
@@ -90,14 +114,17 @@ class __$$_CoreStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_CoreState implements _CoreState {
-  _$_CoreState([this.id]);
+  _$_CoreState([this.id, this.settings = initUserSettingsEntity]);
 
   @override
   final String? id;
+  @override
+  @JsonKey()
+  final UserSettingsEntity settings;
 
   @override
   String toString() {
-    return 'CoreState(id: $id)';
+    return 'CoreState(id: $id, settings: $settings)';
   }
 
   @override
@@ -105,11 +132,13 @@ class _$_CoreState implements _CoreState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_CoreState &&
-            (identical(other.id, id) || other.id == id));
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.settings, settings) ||
+                other.settings == settings));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, id);
+  int get hashCode => Object.hash(runtimeType, id, settings);
 
   @JsonKey(ignore: true)
   @override
@@ -119,10 +148,13 @@ class _$_CoreState implements _CoreState {
 }
 
 abstract class _CoreState implements CoreState {
-  factory _CoreState([final String? id]) = _$_CoreState;
+  factory _CoreState([final String? id, final UserSettingsEntity settings]) =
+      _$_CoreState;
 
   @override
   String? get id;
+  @override
+  UserSettingsEntity get settings;
   @override
   @JsonKey(ignore: true)
   _$$_CoreStateCopyWith<_$_CoreState> get copyWith =>

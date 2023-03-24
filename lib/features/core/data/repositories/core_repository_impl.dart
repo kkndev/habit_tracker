@@ -17,4 +17,18 @@ class CoreRepositoryImpl implements CoreRepository {
   Future<Either<Failure, bool>> initApp() async {
     return const Right(true);
   }
+
+  @override
+  Future<Either<Failure, bool>> updateUserSettings(
+      UserSettingsEntity settings) async {
+    try {
+      await localDataSource.updateUserSettings(
+        language: settings.language,
+        theme: settings.theme,
+      );
+      return const Right(true);
+    } catch (e) {
+      throw StorageFailure(code: 100, message: 'Storage error');
+    }
+  }
 }

@@ -1,7 +1,8 @@
 import 'package:dartz/dartz.dart';
 
-import '../entity/failure.dart';
+import '../entity/entity.dart';
 
 abstract class CoreRepository {
   Future<Either<Failure, bool>> initApp();
+  Future<Either<Failure, bool>> updateUserSettings(UserSettingsEntity settings);
 }

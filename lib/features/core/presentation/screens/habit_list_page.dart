@@ -13,7 +13,7 @@ class _HabitsListScreenState extends State<HabitsListScreen>
     with AutoRouteAwareStateMixin<HabitsListScreen> {
   @override
   void didPushNext() {
-    print('didPushNext');
+    debugPrint('didPushNext');
   }
 
   @override
