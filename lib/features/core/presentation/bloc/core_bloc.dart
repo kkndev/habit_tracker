@@ -7,10 +7,12 @@ import 'core_state.dart';
 class CoreBloc extends Bloc<CoreEvent, CoreState> {
   final InitAppUseCase initAppUseCase;
   final UpdateUserSettingsUseCase updateUserSettingsUseCase;
+  final LoadUserSettingsUseCase loadUserSettingsUseCase;
 
   CoreBloc({
     required this.initAppUseCase,
     required this.updateUserSettingsUseCase,
+    required this.loadUserSettingsUseCase,
   }) : super(CoreState()) {
     on<InitCoreEvent>((event, emit) {
       initAppUseCase(NoParams());
@@ -29,7 +31,23 @@ class CoreBloc extends Bloc<CoreEvent, CoreState> {
         ),
       );
       emit(
-        state.copyWith(settings: newSettings),
+        state.copyWith(
+          settings: newSettings,
+          error: 'error',
+        ),
+      );
+    });
+    on<LoadUserSettingsEvent>((event, emit) async {
+      var result = await loadUserSettingsUseCase(NoParams());
+      result.fold(
+        (error) => emit(
+          state.copyWith(),
+        ),
+        (newSettings) => emit(
+          state.copyWith(
+            settings: newSettings,
+          ),
+        ),
       );
     });
   }

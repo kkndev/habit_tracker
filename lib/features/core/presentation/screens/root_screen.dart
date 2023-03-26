@@ -7,15 +7,22 @@ import '../../../../navigation/router.gr.dart';
 import '../../../../styles/styles.dart';
 import '../bloc/bloc.dart';
 
+final RootRouter _appRouter = RootRouter();
+
 class RootScreen extends StatefulWidget {
-  RootScreen({Key? key}) : super(key: key);
-  final RootRouter _appRouter = RootRouter();
+  const RootScreen({Key? key}) : super(key: key);
 
   @override
   State<RootScreen> createState() => _RootScreenState();
 }
 
 class _RootScreenState extends State<RootScreen> {
+  @override
+  void initState() {
+    context.read<CoreBloc>().add(LoadUserSettingsEvent());
+    super.initState();
+  }
+
   Locale getLanguage(String language) {
     if (language == 'en') {
       return const Locale('en', '');
@@ -37,9 +44,7 @@ class _RootScreenState extends State<RootScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<CoreBloc, CoreState>(
-      listener: (context, state) {
-        // TODO: implement listener
-      },
+      listener: (context, state) {},
       builder: (context, state) {
         return MaterialApp.router(
           debugShowCheckedModeBanner: false,
@@ -47,10 +52,10 @@ class _RootScreenState extends State<RootScreen> {
           localizationsDelegates: AppLocalizations.localizationsDelegates,
           supportedLocales: AppLocalizations.supportedLocales,
           locale: getLanguage(state.settings.language),
-          routeInformationParser: widget._appRouter.defaultRouteParser(),
-          routerDelegate: widget._appRouter.delegate(
+          routeInformationParser: _appRouter.defaultRouteParser(),
+          routerDelegate: _appRouter.delegate(
             initialRoutes: [
-              if (false) const HomeRoute() else const Auth(),
+              if (false) const HomeRoute() else const AuthWrapperRoute(),
             ],
           ),
         );

@@ -9,5 +9,6 @@ class CoreState with _$CoreState {
   factory CoreState([
     String? id,
     @Default(initUserSettingsEntity) UserSettingsEntity settings,
+    String? error,
   ]) = _CoreState;
 }

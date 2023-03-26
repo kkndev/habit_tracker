@@ -18,10 +18,12 @@ Future<void> init() async {
     () => CoreBloc(
       initAppUseCase: sl(),
       updateUserSettingsUseCase: sl(),
+      loadUserSettingsUseCase: sl(),
     ),
   );
   sl.registerLazySingleton(() => InitAppUseCase(sl()));
   sl.registerLazySingleton(() => UpdateUserSettingsUseCase(sl()));
+  sl.registerLazySingleton(() => LoadUserSettingsUseCase(sl()));
   sl.registerLazySingleton<CoreRepository>(
     () => CoreRepositoryImpl(
       remoteDataSource: sl(),

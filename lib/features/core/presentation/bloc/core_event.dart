@@ -17,3 +17,5 @@ class UpdateUserSettingsEvent extends CoreEvent {
   String? language;
   String? theme;
 }
+
+class LoadUserSettingsEvent extends CoreEvent {}

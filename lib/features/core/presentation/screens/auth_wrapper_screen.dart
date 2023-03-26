@@ -1,9 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../../../injection_container.dart';
-import '../bloc/bloc.dart';
+import 'package:habit_tracker/features/core/presentation/bloc/bloc.dart';
 
 @RoutePage()
 class AuthWrapperScreen extends StatelessWidget implements AutoRouteWrapper {
@@ -13,11 +11,14 @@ class AuthWrapperScreen extends StatelessWidget implements AutoRouteWrapper {
 
   @override
   Widget wrappedRoute(context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider.value(
-          value: sl<CoreBloc>(),
-          child: this,
+    return MultiBlocListener(
+      listeners: [
+        BlocListener<CoreBloc, CoreState>(
+          listener: (ctx, state) {
+            if (state.error != null) {
+              showAboutDialog(context: context);
+            }
+          },
         ),
       ],
       child: this,

@@ -31,4 +31,14 @@ class CoreRepositoryImpl implements CoreRepository {
       throw StorageFailure(code: 100, message: 'Storage error');
     }
   }
+
+  @override
+  Future<Either<Failure, UserSettingsEntity>> loadUserSettings() async {
+    try {
+      var result = await localDataSource.loadUserSettings();
+      return Right(result);
+    } catch (e) {
+      throw StorageFailure(code: 100, message: 'Storage error');
+    }
+  }
 }

@@ -1,3 +1,4 @@
+import 'package:habit_tracker/features/core/domain/entity/entity.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 import '../models/models.dart';
@@ -37,6 +38,20 @@ class CoreLocalDataSourceImpl implements CoreLocalDataSource {
         message: e.message,
       );
     }
-    throw UnknownException();
+  }
+
+  @override
+  Future<UserSettingsEntity> loadUserSettings() async {
+    try {
+      var settings = await storage.openBox(settingsBox);
+      var language = await settings.get('language');
+      var theme = await settings.get('theme');
+      return UserSettingsEntity(language: language, theme: theme);
+    } on HiveError catch (e) {
+      throw StorageException(
+        code: e.hashCode,
+        message: e.message,
+      );
+    }
   }
 }

@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
           value: sl<CoreBloc>(),
         ),
       ],
-      child: RootScreen(),
+      child: const RootScreen(),
     );
   }
 }

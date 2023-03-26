@@ -50,7 +50,7 @@ class RootRouter extends $RootRouter {
       ],
     ),
     AutoRoute(
-      page: Auth.page,
+      page: AuthWrapperRoute.page,
       path: '/auth',
       children: [
         AutoRoute(path: '', page: LoginRoute.page),

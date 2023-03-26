@@ -19,6 +19,7 @@ class LoginPage extends StatelessWidget {
     return BlocBuilder<CoreBloc, CoreState>(
       builder: (context, state) {
         return Scaffold(
+          backgroundColor: Theme.of(context).cardColor,
           body: SafeArea(
             child: Center(
               child: Column(
@@ -42,12 +43,50 @@ class LoginPage extends StatelessWidget {
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      context
-                          .read<CoreBloc>()
-                          .add(UpdateUserSettingsEvent(theme: 'dark'));
+                      context.read<CoreBloc>().add(
+                            UpdateUserSettingsEvent(theme: 'dark'),
+                          );
                     },
                     child: const Text('dark'),
                   ),
+                  Row(
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          context.read<CoreBloc>().add(
+                                UpdateUserSettingsEvent(theme: 'light'),
+                              );
+                        },
+                        child: Container(
+                          width: 100,
+                          height: 100,
+                          decoration: BoxDecoration(
+                            color: state.settings.theme == 'light'
+                                ? Colors.black
+                                : Colors.amber,
+                            borderRadius: BorderRadius.circular(50),
+                          ),
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          context.read<CoreBloc>().add(
+                                UpdateUserSettingsEvent(theme: 'dark'),
+                              );
+                        },
+                        child: Container(
+                          width: 100,
+                          height: 100,
+                          decoration: BoxDecoration(
+                            color: state.settings.theme == 'dark'
+                                ? Colors.black
+                                : Colors.deepOrangeAccent,
+                            borderRadius: BorderRadius.circular(50),
+                          ),
+                        ),
+                      ),
+                    ],
+                  )
                 ],
               ),
             ),
